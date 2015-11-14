@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		float moveHorizontal = 5 * Cardboard.SDK.HeadPose.Orientation[1];
-		float moveVertical = -5 * Cardboard.SDK.HeadPose.Orientation[0];
+		float moveHorizontal = -5 * Cardboard.SDK.HeadPose.Orientation[1];
+		float moveVertical = 5 * Cardboard.SDK.HeadPose.Orientation[0];
 
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
