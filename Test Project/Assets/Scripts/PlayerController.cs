@@ -217,10 +217,8 @@ public class PlayerController : MonoBehaviour {
 
 		if (other.gameObject.CompareTag ("Pickup"))
 		{
-			other.gameObject.SetActive (false);
-			count = count + 1;
-			SetCountText ();
-		}
+            Application.LoadLevel("FinalCountdown");
+        }
 	}
 
 	void SetCountText ()
