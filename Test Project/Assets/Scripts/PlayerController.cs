@@ -4,12 +4,14 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public float speed;
+	public float speed = 0;
 	public Text countText;
 	public Text winText;
 
 	private Rigidbody rb;
 	private int count;
+	private int moveToggle = 0;
+	private float moveHorizontal;
 
 	void Start()
 	{
@@ -21,17 +23,32 @@ public class PlayerController : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		float moveHorizontal = -5 * Cardboard.SDK.HeadPose.Orientation[1];
-		float moveVertical = 5 * Cardboard.SDK.HeadPose.Orientation[0];
+		
+		if (Cardboard.SDK.Triggered == true) {
+			moveToggle++;
+		}
 
-		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+		if (moveToggle % 2 != 0){
+			// odd values will mean move forward
+			// even numbers will mean stop
+			speed = 0.5f;
 
-		rb.AddForce (movement * speed);
+			if (Cardboard.SDK.HeadPose.Orientation[1] >= 0){
+				moveHorizontal = 3 * Cardboard.SDK.HeadPose.Orientation[1];
+			} else if (Cardboard.SDK.HeadPose.Orientation[1] < 0){
+				moveHorizontal = -3 * Cardboard.SDK.HeadPose.Orientation[1];
+			}
 
-		// print (Input.GetAxis ("Horizontal"));
-		// print (Input.GetAxis ("Vertical"));
+			Vector3 movement = new Vector3 (moveHorizontal, 0.0f, -0.1f);
 
-		// print (Cardboard.SDK.HeadPose.Orientation[0]);
+			rb.AddForce (movement * speed);
+
+//			print (moveToggle);
+			print (Cardboard.SDK.HeadPose.Orientation[1]);
+//			print (movement);
+		} else {
+			GetComponent<Rigidbody>().velocity=Vector3.zero;
+		}
 	}
 
 	void OnTriggerEnter(Collider other) {
