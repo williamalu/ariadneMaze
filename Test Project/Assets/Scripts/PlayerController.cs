@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public float speed = 0;
+	public float speed = 0f;
 	public Text countText;
 	public Text winText;
 
@@ -12,6 +12,12 @@ public class PlayerController : MonoBehaviour {
 	private int count;
 	private int moveToggle = 0;
 	private float moveHorizontal;
+
+	private float x;
+	private float z;
+	private float angle;
+
+	Vector3 movement = new Vector3(0f, 0f, 0f);
 
 	void Start()
 	{
@@ -31,21 +37,177 @@ public class PlayerController : MonoBehaviour {
 		if (moveToggle % 2 != 0){
 			// odd values will mean move forward
 			// even numbers will mean stop
-			speed = 0.5f;
+			speed = 0.1f;
 
-			if (Cardboard.SDK.HeadPose.Orientation[1] >= 0){
-				moveHorizontal = 3 * Cardboard.SDK.HeadPose.Orientation[1];
-			} else if (Cardboard.SDK.HeadPose.Orientation[1] < 0){
-				moveHorizontal = -3 * Cardboard.SDK.HeadPose.Orientation[1];
+			if (Cardboard.SDK.HeadPose.Orientation[1] >= -0.05 && Cardboard.SDK.HeadPose.Orientation[1] < 0.05){
+				angle = 0.0f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
 			}
 
-			Vector3 movement = new Vector3 (moveHorizontal, 0.0f, -0.1f);
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= 0.05 && Cardboard.SDK.HeadPose.Orientation[1] < 0.15){
+				angle = 0.1f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+
+				movement = new Vector3 (-x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= 0.15 && Cardboard.SDK.HeadPose.Orientation[1] < 0.25){
+				angle = 0.2f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (-x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= 0.25 && Cardboard.SDK.HeadPose.Orientation[1] < 0.35){
+				angle = 0.3f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (-x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= 0.35 && Cardboard.SDK.HeadPose.Orientation[1] < 0.45){
+				angle = 0.4f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (-x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= 0.45 && Cardboard.SDK.HeadPose.Orientation[1] < 0.55){
+				angle = 0.5f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (-x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= 0.55 && Cardboard.SDK.HeadPose.Orientation[1] < 0.65){
+				angle = 0.6f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (-x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= 0.65 && Cardboard.SDK.HeadPose.Orientation[1] < 0.75){
+				angle = 0.7f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (-x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= 0.75 && Cardboard.SDK.HeadPose.Orientation[1] < 0.85){
+				angle = 0.8f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (-x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= 0.85 && Cardboard.SDK.HeadPose.Orientation[1] < 0.95){
+				angle = 0.9f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (-x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= 0.95 && Cardboard.SDK.HeadPose.Orientation[1] < 1.0){
+				angle = 1.0f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= -0.15 && Cardboard.SDK.HeadPose.Orientation[1] < -0.05){
+				angle = -0.1f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= -0.25 && Cardboard.SDK.HeadPose.Orientation[1] < -0.15){
+				angle = -0.2f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= -0.35 && Cardboard.SDK.HeadPose.Orientation[1] < -0.25){
+				angle = -0.3f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= -0.45 && Cardboard.SDK.HeadPose.Orientation[1] < -0.35){
+				angle = -0.4f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= -0.55 && Cardboard.SDK.HeadPose.Orientation[1] < -0.45){
+				angle = -0.5f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= -0.65 && Cardboard.SDK.HeadPose.Orientation[1] < -0.55){
+				angle = -0.6f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= -0.75 && Cardboard.SDK.HeadPose.Orientation[1] < -0.65){
+				angle = -0.7f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= -0.85 && Cardboard.SDK.HeadPose.Orientation[1] < -0.75){
+				angle = -0.8f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= -0.95 && Cardboard.SDK.HeadPose.Orientation[1] < -0.85){
+				angle = -0.9f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
+
+			else if (Cardboard.SDK.HeadPose.Orientation[1] >= -1.00 && Cardboard.SDK.HeadPose.Orientation[1] < -0.95){
+				angle = -1f * Mathf.PI;
+				z = Mathf.Cos (angle);
+				x = 1.0f - z;
+				
+				movement = new Vector3 (x, 0.0f, -z);
+			}
 
 			rb.AddForce (movement * speed);
-
-//			print (moveToggle);
-			print (Cardboard.SDK.HeadPose.Orientation[1]);
-//			print (movement);
 		} else {
 			GetComponent<Rigidbody>().velocity=Vector3.zero;
 		}

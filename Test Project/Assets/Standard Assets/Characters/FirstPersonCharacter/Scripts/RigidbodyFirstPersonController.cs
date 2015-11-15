@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using System.Collections;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -86,6 +87,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_YRotation;
         private Vector3 m_GroundContactNormal;
         private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
+
+		private int toggleMove = 0;
 
 
         public Vector3 Velocity
@@ -215,6 +218,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     x = CrossPlatformInputManager.GetAxis("Horizontal"),
                     y = CrossPlatformInputManager.GetAxis("Vertical")
                 };
+
+				// If GetAxis are empty, try alternate input methods.
+				if (Math.Abs (input.x) + Math.Abs (input.y) < 2 * float.Epsilon) {
+					input = new Vector2 (0, 1); // go straight forward by setting positive Vertical
+				}
+
 			movementSettings.UpdateDesiredTargetSpeed(input);
             return input;
         }
